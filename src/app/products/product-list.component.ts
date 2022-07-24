@@ -1,17 +1,24 @@
-import { Component } from "@angular/core";
+import { Component,OnInit } from "@angular/core";
 
 
 @Component({
     selector: "pm-products",
     templateUrl: "./product-list.component.html",
+    styleUrls: ["./product-list.component.css"]
     
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
     pageTitle: string = "Product List";
     imageWidth: number = 50;
     imageMargin: number = 2;
     showImage=false;
-    listFilter: string="cart";
+    private _listFilter: string = "cart";
+    get listFilter(): string {
+        return this._listFilter;
+    }
+    set listFilter(value: string) {
+        this._listFilter = value;
+    }
     products: any[] = [
         {
           "productId": 1,
@@ -66,5 +73,8 @@ export class ProductListComponent {
       ]
       toggleImage(): void {
         this.showImage = !this.showImage;
+      }
+      ngOnInit(): void {
+        this._listFilter = "cart";
       }
 }
